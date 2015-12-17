@@ -1,0 +1,57 @@
+
+
+ 
+1,
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+
+2, 
+echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+
+3, 
+apt-get install mono-devel
+apt-get install mono-complete
+apt-get install referenceassemblies-pcl
+ 
+ ------------------
+ 
+
+6, 创建目录  sudo mkdir /srv/www/mininasweb3.0
+7, 修改权限  sudo chmod -R 777 /srv/www
+ 
+
+--------------------------------------------------------------------------------
+jexus
+
+1, wget http://www.linuxdot.net/down/jexus-5.8.0.tar.gz
+
+2, tar -zxvf jexus-5.8.0.tar.gz
+
+3.  cd jexus-5.8.0
+
+4.   ./install
+4.1 nano /usr/jexus/jws
+    修改   export MONO_EXTERNAL_ENCODINGS="gbk:gb18030:gb2312"   为   export MONO_EXTERNAL_ENCODINGS="utf-8"
+
+5. 添加自启动 
+> nano /etc/rc.local  
+    /usr/jexus/jws start
+6,配置站点
+> cd /usr/jexus/siteconf
+> nano default
+   添加下面内容:
+	port=80
+	root=/ /srv/www/mininasweb3.0
+	hosts=*   
+
+7. 保存
+
+8. nano mininasapi
+   添加下面内容:
+	port=8000
+	root=/ /srv/www/mininaswebAPI3.0
+	hosts=*   
+9.保存
+
+10. 启动      /usr/jexus/jws start
+----------------------------------------------------------------------
+ 
